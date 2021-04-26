@@ -38,3 +38,26 @@ module "firewall" {
   project = "${var.project}"
   subnet  = "${module.vpc.subnet}"
 }
+  
+  resource "google_sql_database_instance" "master" {
+  name = "master-instance-${random_id.db_name_suffix.hex}"
+
+  settings {
+    tier = "db-f1-micro"
+  }
+}
+
+resource "google_sql_database" "database" {
+  name     = "my-database"
+  instance = google_sql_database_instance.master.name
+}
+
+resource "google_sql_user" "users" {
+  name     = "user"
+  instance = google_sql_database_instance.master.name
+  password = "Eey3ar8fz343uciy"
+}
+
+
+data "google_cloud_run_locations" "available" {
+}
