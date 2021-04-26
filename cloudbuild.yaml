@@ -14,6 +14,16 @@
 
 
 steps:
+  # Install dependencies
+  - name: python
+    entrypoint: pip
+    args: ["install", "-r", "requirements.txt", "--user"]
+
+  # Run unit tests
+  - name: python
+    entrypoint: python
+    args: ["-m", "pytest", "--junitxml=${SHORT_SHA}_test_log.xml"] 
+
 - id: 'branch name'
   name: 'alpine'
   entrypoint: 'sh'  
@@ -92,15 +102,6 @@ steps:
 # [END tf-apply]      
 
 steps:
-  # Install dependencies
-  - name: python
-    entrypoint: pip
-    args: ["install", "-r", "requirements.txt", "--user"]
-
-  # Run unit tests
-  - name: python
-    entrypoint: python
-    args: ["-m", "pytest", "--junitxml=${SHORT_SHA}_test_log.xml"] 
 
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
