@@ -99,12 +99,6 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push',  'gcr.io/$PROJECT_ID/myimage:$SHORT_SHA']
 
-  # Deploy to Cloud Run
-  - name: google/cloud-sdk
-    args: ['gcloud', 'run', 'deploy', 'helloworld', 
-           '--image='gcr.io/$PROJECT_ID/myimage:$SHORT_SHA', 
-           '--region', 'us-central1', '--platform', 'managed', 
-           '--allow-unauthenticated']
 
 # Save test logs to Google Cloud Storage
 artifacts:
