@@ -60,11 +60,6 @@ module "mysql" {
   master_user_name = "user"
   master_user_host = "%"
 
-  # Pass the private network link to the module
-  private_network = google_compute_network.private_network.self_link
-
-  # Wait for the vpc connection to complete
-  dependencies = [google_service_networking_connection.private_vpc_connection.network]
 
   custom_labels = {
     test-id = "mysql-private-ip-example"
