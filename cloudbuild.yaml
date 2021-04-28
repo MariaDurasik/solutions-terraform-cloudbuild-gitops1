@@ -12,14 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 steps:
-  # Docker Build
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 
-           'gcr.io/$PROJECT_ID/myimage:$SHORT_SHA', '.']
-
-  # Docker push to Google Artifact Registry
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push',  'gcr.io/$PROJECT_ID/myimage:$SHORT_SHA']
   - name: 'alpine'
   entrypoint: 'sh'  
   args: 
@@ -76,8 +68,7 @@ steps:
 # [END tf-plan]
 
 # [START tf-apply]
-- id: 'tf apply'
-  name: 'hashicorp/terraform:0.11.14'
+  - name: 'hashicorp/terraform:0.11.14'
   entrypoint: 'sh'
   args: 
   - '-c'
