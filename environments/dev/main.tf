@@ -49,12 +49,6 @@ resource "google_compute_instance" "vm_instance" {
     }
   }
 
-  network_interface {
-    network = google_compute_network.vpc_network.name
-    access_config {
-    }
-  }
-}
 
 resource "google_compute_network" "vpc_network" {
   name = "terraform-network"
