@@ -23,7 +23,6 @@ terraform {
 }
 
 provider "google" {
-  credentials = file("secound.json")
   project = "secound"
   region  = "europe-central2"
   zone    = "europe-central2-a"
