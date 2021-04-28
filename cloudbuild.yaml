@@ -90,18 +90,15 @@ steps:
 
   # Docker Build
   name: 'gcr.io/cloud-builders/docker'
-  entrypoint: 'sh'
     args: ['build', '-t', 
            'us-central1-docker.pkg.dev/$PROJECT_ID/$BRANCH_NAME/myimage:$SHORT_SHA', '.']
 
   # Docker push to Google Artifact Registry
   name: 'gcr.io/cloud-builders/docker'
-  entrypoint: 'sh'
     args: ['push',  'us-central1-docker.pkg.dev/$PROJECT_ID/$BRANCH_NAME/myimage:$SHORT_SHA']
 
   # Deploy to Cloud Run
   name: google/cloud-sdk
-  entrypoint: 'sh'
     args: ['gcloud', 'run', 'deploy', 'helloworld', 
            '--image=us-central1-docker.pkg.dev/$PROJECT_ID/$BRANCH_NAME/myimage:$SHORT_SHA', 
            '--region', 'us-central1', '--platform', 'managed', 
