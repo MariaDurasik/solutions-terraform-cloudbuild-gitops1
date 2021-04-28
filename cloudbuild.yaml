@@ -91,10 +91,10 @@ steps:
 steps:
 
 # Docker Build
- - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-t', 'europe-central2-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/quickstart-image:tag1', '.' ]
- images:
-- 'europe-central2-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/quickstart-image:tag1'
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/quickstart-image:tag1', '.' ]
+images:
+- 'us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/quickstart-image:tag1'
 
   # Docker push to Google Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
