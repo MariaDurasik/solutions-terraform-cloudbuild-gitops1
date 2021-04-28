@@ -90,20 +90,19 @@ steps:
 
 steps:
 
-# Docker Build
-- name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/quickstart-image:tag1', '.' ]
-images:
-- 'us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/quickstart-image:tag1'
+  # Docker Build
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 
+           'us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAMEmyimage:$SHORT_SHA', '.']
 
   # Docker push to Google Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push',  'europe-central2-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/quickstart-image:tag1']
+    args: ['push',  'us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAMEmyimage:$SHORT_SHA']
 
   # Deploy to Cloud Run
   - name: google/cloud-sdk
     args: ['gcloud', 'run', 'deploy', 'helloworld', 
-           '--image=europe-central2-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/quickstart-image:tag1', 
+           '--image=us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAMEmyimage:$SHORT_SHA', 
            '--region', 'us-central1', '--platform', 'managed', 
            '--allow-unauthenticated']
 
@@ -115,4 +114,4 @@ artifacts:
       - ${SHORT_SHA}_test_log.xml
 # Store images in Google Artifact Registry
 images:
-  - europe-central2-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/myimage:$SHORT_SHA
+  - us-central1-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/myimage:$SHORT_SHA
