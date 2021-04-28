@@ -21,7 +21,6 @@ steps:
       echo "***********************"
       echo "$BRANCH_NAME"
       echo "***********************"
-
 - id: 'tf init'
   name: 'hashicorp/terraform:0.11.14'
   entrypoint: 'sh'
@@ -45,7 +44,6 @@ steps:
           cd ../../
         done
       fi 
-
 # [START tf-plan]
 - id: 'tf plan'
   name: 'hashicorp/terraform:0.11.14'
