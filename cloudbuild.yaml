@@ -21,5 +21,5 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push',  'gcr.io/$PROJECT_ID/myimage:$SHORT_SHA']
  #Terraform init
- - name: 'gcr.io/$PROJECT_ID/terraform'
+ - name: 'gcr.io/cloud-builders/terraform'
     args: ['init']
