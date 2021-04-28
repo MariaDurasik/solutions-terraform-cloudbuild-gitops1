@@ -90,7 +90,7 @@ steps:
 
 steps:
 
-  # Docker Build
+# Docker Build
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 
            'europe-central2-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/myimage:$SHORT_SHA', '.']
