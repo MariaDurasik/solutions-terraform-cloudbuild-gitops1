@@ -48,7 +48,6 @@ module "mysql" {
   project = "${var.project}"
   region  = "europe-central2"
   zone    = "europe-central2-a"
-  name    = google_sql_database_instance.master.name
   db_name = "db"
   engine       = "MYSQL_5_6"
 
