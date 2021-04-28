@@ -45,21 +45,20 @@ module "mysql" {
   # source = "github.com/gruntwork-io/terraform-google-sql.git//modules/cloud-sql?ref=v0.2.0"
   source = "./modules/cloud-sql"
 
-  project = var.project
-  region  = var.region
-  name    = local.instance_name
-  db_name = var.db_name
-
-  engine       = var.mysql_version
-  machine_type = var.machine_type
+  project = "${var.project}"
+  region  = "europe-central2"
+  zone    = "europe-central2-a"
+  name    = google_sql_database_instance.master.name
+  db_name = "db"
+  engine       = "MYSQL_5_6"
 
   # These together will construct the master_user privileges, i.e.
   # 'master_user_name'@'master_user_host' IDENTIFIED BY 'master_user_password'.
   # These should typically be set as the environment variable TF_VAR_master_user_password, etc.
   # so you don't check these into source control."
-  master_user_password = var.master_user_password
+  master_user_password = "Eey3ar8fz343uciy"
 
-  master_user_name = var.master_user_name
+  master_user_name = "user"
   master_user_host = "%"
 
   # Pass the private network link to the module
