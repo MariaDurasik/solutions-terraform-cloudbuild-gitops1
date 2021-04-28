@@ -18,17 +18,6 @@ terraform {
 # we have to construct some of the configuration values dynamically
 # ------------------------------------------------------------------------------
 
-locals {
-  # Determine the engine type
-  is_postgres = replace(var.engine, "POSTGRES", "") != var.engine
-  is_mysql    = replace(var.engine, "MYSQL", "") != var.engine
-
-  # Calculate actuals, so we get expected behavior for each engine
-  actual_binary_log_enabled     = local.is_postgres ? false : var.mysql_binary_log_enabled
-  actual_availability_type      = local.is_postgres && var.enable_failover_replica ? "REGIONAL" : "ZONAL"
-  actual_failover_replica_count = local.is_postgres ? 0 : var.enable_failover_replica ? 1 : 0
-}
-
 # ------------------------------------------------------------------------------
 # CREATE THE MASTER INSTANCE
 #
