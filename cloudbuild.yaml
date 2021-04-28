@@ -98,14 +98,3 @@ steps:
   # Docker push to Google Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push',  'gcr.io/$PROJECT_ID/myimage:$SHORT_SHA']
-
-
-# Save test logs to Google Cloud Storage
-artifacts:
-  objects:
-    location: gs://$_BUCKET_NAME/
-    paths:
-      - ${SHORT_SHA}_test_log.xml
-# Store images in Google Artifact Registry
-images:
-  - gcr.io/$PROJECT_ID/myimage:$SHORT_SHA
