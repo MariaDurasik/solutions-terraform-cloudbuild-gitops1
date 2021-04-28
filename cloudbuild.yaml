@@ -20,6 +20,3 @@ steps:
   # Docker push to Google Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push',  'gcr.io/$PROJECT_ID/myimage:$SHORT_SHA']
- #Terraform init
- - name: 'gcr.io/cloud-builders/terraform'
-    args: ['init']
