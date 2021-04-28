@@ -91,18 +91,19 @@ steps:
 steps:
 
 # Docker Build
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 
-           'europe-central2-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/myimage:$SHORT_SHA', '.']
+ - name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', 'europe-central2-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/quickstart-image:tag1', '.' ]
+ images:
+- 'europe-central2-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/quickstart-image:tag1'
 
   # Docker push to Google Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push',  'europe-central2-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/myimage:$SHORT_SHA']
+    args: ['push',  'europe-central2-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/quickstart-image:tag1']
 
   # Deploy to Cloud Run
   - name: google/cloud-sdk
     args: ['gcloud', 'run', 'deploy', 'helloworld', 
-           '--image=europe-central2-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/myimage:$SHORT_SHA', 
+           '--image=europe-central2-docker.pkg.dev/$PROJECT_ID/$_REPO_NAME/quickstart-image:tag1', 
            '--region', 'us-central1', '--platform', 'managed', 
            '--allow-unauthenticated']
 
