@@ -22,49 +22,13 @@ terraform {
   }
 }
 
-provider "google" {
-  project = "secound"
-  region  = "europe-central2"
-  zone    = "europe-central2-a"
+provider "mysql" {
+  endpoint = "my-database.example.com:3306"
+  username = "app-user"
+  password = "app-password"
 }
 
-
-
-resource "google_compute_instance" "vm_instance" {
-  name         = "terraform-instance"
-  machine_type = "f1-micro"
-
-  boot_disk {
-    initialize_params {
-      image = "debian-cloud/debian-9"
-    }
-  }
-
-
-
-resource "random_id" "db_name_suffix" {
-byte_length = 4
-}
-
-resource "google_sql_database_instance" "master" {
-name = "master-instance-${random_id.db_name_suffix.hex}"
-
-settings {
-tier = "db-f1-micro"
-}
-}
-
-resource "google_sql_database" "database" {
-name     = "my-database"
-instance = google_sql_database_instance.master.name
-}
-
-resource "google_sql_user" "users" {
-name     = "user"
-instance = google_sql_database_instance.master.name
-password = "Eey3ar8fz343uciy"
-}
-
-
-data "google_cloud_run_locations" "available" {
+# Create a Database
+resource "mysql_database" "app" {
+  name = "my_awesome_app"
 }
