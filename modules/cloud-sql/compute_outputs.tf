@@ -6,18 +6,6 @@
 # PREPARE LOCALS FOR THE OUTPUTS
 # ------------------------------------------------------------------------------
 
-locals {
-  # Replica proxy connection info
-  failover_proxy_connection = join("", data.template_file.failover_proxy_connection.*.rendered)
-
-  # Replica certificate info
-  failover_certificate                  = join("", data.template_file.failover_certificate.*.rendered)
-  failover_certificate_common_name      = join("", data.template_file.failover_certificate_common_name.*.rendered)
-  failover_certificate_create_time      = join("", data.template_file.failover_certificate_create_time.*.rendered)
-  failover_certificate_expiration_time  = join("", data.template_file.failover_certificate_expiration_time.*.rendered)
-  failover_certificate_sha1_fingerprint = join("", data.template_file.failover_certificate_sha1_fingerprint.*.rendered)
-}
-
 # ------------------------------------------------------------------------------
 # FAILOVER REPLICA PROXY CONNECTION TEMPLATE
 # ------------------------------------------------------------------------------
