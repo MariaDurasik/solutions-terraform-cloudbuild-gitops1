@@ -88,8 +88,6 @@ steps:
       fi
 # [END tf-apply]      
 
-steps:
-
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 
