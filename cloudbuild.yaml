@@ -15,13 +15,11 @@
 
 steps:
   # Install dependencies
- -id: 'python env'
   name: python
     entrypoint: pip
     args: ["install", "-r", "requirements.txt", "--user"]
 
   # Run unit tests
- - id: 'run test'
   name: python
     entrypoint: python
     args: ["-m", "pytest", "--junitxml=${SHORT_SHA}_test_log.xml"] 
