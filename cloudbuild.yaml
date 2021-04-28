@@ -12,7 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 steps:
-  - name: 'alpine'
+- id: 'branch name'
+  name: 'alpine'
   entrypoint: 'sh'  
   args: 
   - '-c'
@@ -20,7 +21,8 @@ steps:
       echo "***********************"
       echo "$BRANCH_NAME"
       echo "***********************"
-  - name: 'hashicorp/terraform:0.11.14'
+- id: 'tf init'
+  name: 'hashicorp/terraform:0.11.14'
   entrypoint: 'sh'
   args: 
   - '-c'
@@ -43,7 +45,8 @@ steps:
         done
       fi 
 # [START tf-plan]
-  - name: 'hashicorp/terraform:0.11.14'
+- id: 'tf plan'
+  name: 'hashicorp/terraform:0.11.14'
   entrypoint: 'sh'
   args: 
   - '-c'
@@ -68,7 +71,8 @@ steps:
 # [END tf-plan]
 
 # [START tf-apply]
-  - name: 'hashicorp/terraform:0.11.14'
+- id: 'tf apply'
+  name: 'hashicorp/terraform:0.11.14'
   entrypoint: 'sh'
   args: 
   - '-c'
@@ -81,4 +85,4 @@ steps:
         echo "Branch '$BRANCH_NAME' does not represent an oficial environment."
         echo "*******************************************************************************"
       fi
-# [END tf-apply]  
+# [END tf-apply]   
