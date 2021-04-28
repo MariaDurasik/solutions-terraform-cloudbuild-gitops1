@@ -13,32 +13,27 @@
 # limitations under the License.
 
 
-locals {
-  "env" = "dev"
+terraform {
+  required_providers {
+    google = {
+      source = "hashicorp/google"
+      version = "3.65.0"
+    }
+  }
 }
 
 provider "google" {
-  project = "${var.project}"
+
+  credentials = file("secound.json")
+
+  project = "secound"
+  region  = "europe-central2"
+  zone    = "europe-central2-a"
 }
 
-module "vpc" {
-  source  = "../../modules/vpc"
-  project = "${var.project}"
-  env     = "${local.env}"
-}
 
-module "http_server" {
-  source  = "../../modules/http_server"
-  project = "${var.project}"
-  subnet  = "${module.vpc.subnet}"
-}
 
-module "firewall" {
-  source  = "../../modules/firewall"
-  project = "${var.project}"
-  subnet  = "${module.vpc.subnet}"
-}
-esource "google_compute_instance" "vm_instance" {
+resource "google_compute_instance" "vm_instance" {
   name         = "terraform-instance"
   machine_type = "f1-micro"
 
