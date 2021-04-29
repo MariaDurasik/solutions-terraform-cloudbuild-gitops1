@@ -11,12 +11,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-locals {
-  "env" = "dev"
-}
 
 provider "google" {
   project = "${var.project}"
+  region  = "europe-central2"
+  zone    = "europe-central2-a"
 }
 
 resource "google_sql_database" "database" {
