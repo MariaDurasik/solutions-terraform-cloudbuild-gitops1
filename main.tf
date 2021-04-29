@@ -24,7 +24,6 @@ module "gcloud" {
   version = "~> 2.0"
 
   platform = "linux"
-  additional_components = ["kubectl", "beta"]
 
   create_cmd_entrypoint  = "gcloud"
   create_cmd_body        = "version"
@@ -36,8 +35,14 @@ module "gcloud" {
 resource "random_id" "db_name_suffix" {
 byte_length = 4
 }
+  
+resource "google_sql_database_instance" "master" {
+name = "master-instance-${random_id.db_name_suffix.hex}"
 
-
+settings {
+tier = "db-f1-micro"
+}
+}
 
 resource "google_sql_database" "database" {
 name     = "my-database"
