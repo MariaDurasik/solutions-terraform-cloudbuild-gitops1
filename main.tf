@@ -16,14 +16,13 @@ terraform {
   required_providers {
     google = {
       source = "hashicorp/google"
-      version = "3.5.0"
+      version = "4.0.0"
     }
   }
 }
 
 provider "google" {
   project = "secound"
-  version = "~> 3.0.0"
 }
 
 module "sql-db" {
