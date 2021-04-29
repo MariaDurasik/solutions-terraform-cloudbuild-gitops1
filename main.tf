@@ -26,17 +26,7 @@ provider "google" {
   version = "~> 3.0.0"
 }
 
-resource "google_sql_database" "database" {
-  name     = "my-database"
-  instance = google_sql_database_instance.instance.name
-}
-
-resource "google_sql_database_instance" "instance" {
-  name   = "my-database-instance"
-  region = "us-central1"
-  settings {
-    tier = "db-f1-micro"
-  }
-
-  deletion_protection  = "true"
+module "sql-db" {
+  source  = "GoogleCloudPlatform/sql-db/google//modules/mysql"
+  version = "4.0.0"
 }
