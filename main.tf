@@ -81,11 +81,3 @@ provider "google-beta" {
   region = "us-central1"
   zone   = "us-central1-a"
 }
-resource "google_sql_database" "database" {
-name     = "my-database"
-}
-
-resource "google_sql_user" "users" {
-name     = "user"
-password = "Eey3ar8fz343uciy"
-}
