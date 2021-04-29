@@ -15,26 +15,20 @@
 
 provider "google" {
   project = "${var.project}"
+  version = "~> 3.0.0"
 }
-module "project-factory" {
-  source  = "terraform-google-modules/project-factory/google"
-  version = "~> 10.1"
 
-  name                 = "pf-test-1"
-  random_project_id    = true
-  org_id               = "1234567890"
-  usage_bucket_name    = "pf-test-1-usage-report-bucket"
-  usage_bucket_prefix  = "pf/test/1/integration"
-  billing_account      = "ABCDEF-ABCDEF-ABCDEF"
-  svpc_host_project_id = "shared_vpc_host_name"
-
-  shared_vpc_subnets = [
-    "projects/base-project-196723/regions/us-east1/subnetworks/default",
-    "projects/base-project-196723/regions/us-central1/subnetworks/default",
-    "projects/base-project-196723/regions/us-central1/subnetworks/subnet-1",
-  ]
+resource "google_sql_database" "database" {
+  name     = "my-database"
+  instance = google_sql_database_instance.instance.name
 }
-module "sql-db" {
-  source  = "GoogleCloudPlatform/sql-db/google//modules/mysql"
-  version = "4.0.0"
+
+resource "google_sql_database_instance" "instance" {
+  name   = "my-database-instance"
+  region = "us-central1"
+  settings {
+    tier = "db-f1-micro"
+  }
+
+  deletion_protection  = "true"
 }
