@@ -20,11 +20,11 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push',  'gcr.io/$PROJECT_ID/myimage:$SHORT_SHA']
   #Terraform init
-  - name: 'hashicorp/terraform:0.12.6'
+  - name: 'hashicorp/terraform:0.11.14'
     args: ['init']
   #Terraform plan
-  - name: 'hashicorp/terraform:0.12.6'
+  - name: 'hashicorp/terraform:0.11.14'
     args: [ 'plan' ]
   #Terraform apply
-  - name: 'hashicorp/terraform:0.12.6'
+  - name: 'hashicorp/terraform:0.11.14'
     args: ['apply','-var=PROJECT_ID=$PROJECT_ID','-auto-approve']
