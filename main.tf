@@ -19,20 +19,17 @@ provider "google" {
   project = "${var.project}"
 }
 
-module "vpc" {
-  source  = "./modules/vpc"
-  project = "${var.project}"
-  env     = "${local.env}"
+resource "google_sql_database" "database" {
+  name     = "my-database"
+  instance = google_sql_database_instance.instance.name
 }
 
-module "http_server" {
-  source  = "./modules/http_server"
-  project = "${var.project}"
-  subnet  = "${module.vpc.subnet}"
-}
+resource "google_sql_database_instance" "instance" {
+  name   = "my-database-instance"
+  region = "us-central1"
+  settings {
+    tier = "db-f1-micro"
+  }
 
-module "firewall" {
-  source  = "./modules/firewall"
-  project = "${var.project}"
-  subnet  = "${module.vpc.subnet}"
+  deletion_protection  = "true"
 }
