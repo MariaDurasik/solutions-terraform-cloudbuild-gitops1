@@ -25,6 +25,6 @@ steps:
   #Terraform plan
   - name: 'hashicorp/terraform:0.12.31'
     args: [ 'plan' ]
-  #Terraform apply
+#Terraform apply
   - name: 'hashicorp/terraform:0.12.31'
-     args: ['apply', '-auto-approve']
+    args: [ 'apply', '-auto-approve']
