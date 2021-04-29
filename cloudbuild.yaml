@@ -12,17 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 steps:
- — name: hashicorp/terraform:0.14.11
+ — name: hashicorp/terraform:0.12
    id: terraform-init
    args: ['init']
    dir: 'path/to/terraform/folder'
 # 1. Select Target Workspace
- — name: hashicorp/terraform:0.14.11
+ — name: hashicorp/terraform:0.12
    id: terraform-workspace
    args: ['workspace', 'select', '${_ENV}']
    dir: 'path/to/terraform/folder'
 # 2. Apply Terraform
- — name: hashicorp/terraform:0.14.11
+ — name: hashicorp/terraform:0.12
    id: terraform-apply
    args: ['apply', '-auto-approve']
    dir: 'path/to/terraform/folder'
