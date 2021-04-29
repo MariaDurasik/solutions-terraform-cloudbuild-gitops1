@@ -33,6 +33,10 @@ resource "google_compute_instance" "vm_instance" {
   name         = "terraform-instance"
   machine_type = "f1-micro"
 
+resource "google_compute_instance" "vm_instance" {
+  name         = "terraform-instance"
+  machine_type = "f1-micro"
+
   boot_disk {
     initialize_params {
       image = "debian-cloud/debian-9"
@@ -44,5 +48,36 @@ resource "google_compute_instance" "vm_instance" {
     access_config {
     }
   }
+}
 
+resource "google_compute_network" "vpc_network" {
+  name = "terraform-network"
+}
+
+
+resource "random_id" "db_name_suffix" {
+byte_length = 4
+}
+
+resource "google_sql_database_instance" "master" {
+name = "master-instance-${random_id.db_name_suffix.hex}"
+
+settings {
+tier = "db-f1-micro"
+}
+}
+
+resource "google_sql_database" "database" {
+name     = "my-database"
+instance = google_sql_database_instance.master.name
+}
+
+resource "google_sql_user" "users" {
+name     = "user"
+instance = google_sql_database_instance.master.name
+password = "Eey3ar8fz343uciy"
+}
+
+
+data "google_cloud_run_locations" "available" {
 }
