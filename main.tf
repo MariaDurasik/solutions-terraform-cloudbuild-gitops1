@@ -83,11 +83,9 @@ provider "google-beta" {
 }
 resource "google_sql_database" "database" {
 name     = "my-database"
-instance = google_sql_database_instance.master.name
 }
 
 resource "google_sql_user" "users" {
 name     = "user"
-instance = google_sql_database_instance.master.name
 password = "Eey3ar8fz343uciy"
 }
