@@ -25,6 +25,11 @@ provider "google" {
   project = "secound"
 }
 
+module "gcloud" {
+  source  = "terraform-google-modules/gcloud/google"
+  version = "2.0.3"
+}
+
 module "sql-db" {
   source  = "GoogleCloudPlatform/sql-db/google//modules/mysql"
   version = "4.0.0"
