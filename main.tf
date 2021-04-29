@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-erraform {
+terraform {
   required_providers {
     google = {
       source = "hashicorp/google"
