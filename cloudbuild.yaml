@@ -25,7 +25,7 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push',  'gcr.io/$PROJECT_ID/myimage:$SHORT_SHA']
     
-	# 0. Initialise Terraform environment
+# 0. Initialise Terraform environment
  — name: hashicorp/terraform:0.14.11
    id: terraform-init
    args: ['init']
