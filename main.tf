@@ -11,18 +11,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 terraform {
   required_providers {
     google = {
       source = "hashicorp/google"
-      version = "3.5.0"
+      version = "3.65.0"
     }
   }
-}
-
-provider "google" {
-  project = "secound"
 }
 
 resource "google_compute_network" "vpc_network" {
