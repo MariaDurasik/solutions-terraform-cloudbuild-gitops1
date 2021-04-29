@@ -16,3 +16,11 @@ steps:
   args: ['init']
 - name: 'hashicorp/terraform:0.14.2'
   args: ['apply','-var=PROJECT_ID=$PROJECT_ID','-auto-approve']
+  
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 
+           'gcr.io/$PROJECT_ID/myimage:$SHORT_SHA', '.']
+
+  # Docker push to Google Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push',  'gcr.io/$PROJECT_ID/myimage:$SHORT_SHA']
