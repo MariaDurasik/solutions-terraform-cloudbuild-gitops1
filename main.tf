@@ -12,9 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+erraform {
+  required_providers {
+    google = {
+      source = "hashicorp/google"
+      version = "3.5.0"
+    }
+  }
+}
 
 provider "google" {
-  project = "${var.project}"
+  project = "secound"
   version = "~> 3.0.0"
 }
 
