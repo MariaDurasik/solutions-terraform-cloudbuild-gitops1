@@ -27,4 +27,4 @@ steps:
     args: [ 'plan' ]
   #Terraform apply
   - name: 'hashicorp/terraform:0.12.31'
-    args: ['apply','-var=PROJECT_ID=$PROJECT_ID','-auto-approve']
+     args: ['apply', '-auto-approve']
