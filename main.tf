@@ -77,7 +77,3 @@ name     = "user"
 instance = google_sql_database_instance.master.name
 password = "Eey3ar8fz343uciy"
 }
-
-
-data "google_cloud_run_locations" "available" {
-}
