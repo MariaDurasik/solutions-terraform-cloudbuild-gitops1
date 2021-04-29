@@ -12,10 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 steps:
-- name: 'hashicorp/terraform:0.14.2'
-  args: ['init']
-- name: 'hashicorp/terraform:0.14.2'
-  args: ['apply','-var=PROJECT_ID=$PROJECT_ID','-auto-approve']
+
   
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 
