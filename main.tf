@@ -25,12 +25,24 @@ provider "google" {
   project = "secound"
 }
 
-module "gcloud" {
-  source  = "terraform-google-modules/gcloud/google"
-  version = "2.0.3"
+resource "google_compute_network" "vpc_network" {
+  name = "terraform-network"
 }
 
-module "sql-db" {
-  source  = "GoogleCloudPlatform/sql-db/google//modules/mysql"
-  version = "4.0.0"
+resource "google_compute_instance" "vm_instance" {
+  name         = "terraform-instance"
+  machine_type = "f1-micro"
+
+  boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-9"
+    }
+  }
+
+  network_interface {
+    network = google_compute_network.vpc_network.name
+    access_config {
+    }
+  }
+
 }
