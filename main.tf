@@ -69,7 +69,6 @@ module "mysql" {
   # access from specific trusted networks, servers or applications in your VPC. By default, we recommend setting
   # deletion_protection to true, to ensure database instances are not inadvertently destroyed.
   enable_public_internet_access = true
-  deletion_protection           = false
 
   # Default setting for this is 'false' in 'variables.tf'
   # In the test cases, we're setting this to true, to test forced SSL.
