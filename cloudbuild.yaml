@@ -20,13 +20,13 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push',  'gcr.io/$PROJECT_ID/myimage:$SHORT_SHA']
   #Terraform init
-  - name: 'hashicorp/terraform:0.12.6'
+  - name: 'hashicorp/terraform:0.13'
     args: ['init']
   #Terraform plan
-  - name: 'hashicorp/terraform:0.12.6'
+  - name: 'hashicorp/terraform:0.13'
     args: [ 'plan' ]
 #Terraform apply
-  - name: 'hashicorp/terraform:0.12.6'
+  - name: 'hashicorp/terraform:0.13'
     args: [ 'apply', '-auto-approve']  
 #Sql
   - name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
