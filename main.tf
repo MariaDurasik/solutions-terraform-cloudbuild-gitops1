@@ -18,6 +18,7 @@ provider "google" {
   version = "~> 3.22"
 }
 
+<<<<<<< HEAD
 provider "null" {
   version = "~> 2.1"
 }
@@ -33,6 +34,11 @@ resource "random_id" "name" {
 module "mysql-db" {
   source               = "../../modules/mysql"
   name                 = var.db_name
+=======
+module "mssql" {
+  source               = "./modules/mssql"
+  name                 = var.name
+>>>>>>> e7b8006bc15ffc6c00ee3665508035c1f83d6561
   random_instance_name = true
   database_version     = "MYSQL_5_6"
   project_id           = var.project_id
