@@ -1,31 +1,44 @@
-# Managing infrastructure as code with Terraform, Cloud Build, and GitOps
+# Cloud MS SQL Server database Example
 
-This is the repo for the [Managing infrastructure as code with Terraform, Cloud Build, and GitOps](https://cloud.google.com/solutions/managing-infrastructure-as-code) tutorial. This tutorial explains how to manage infrastructure as code with Terraform and Cloud Build using the popular GitOps methodology. 
+This example shows how create MS SQL Server database using the Terraform module.
 
-## Configuring your **dev** environment
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Inputs
 
-Just for demostration, this step will:
- 1. Configure an apache2 http server on network '**dev**' and subnet '**dev**-subnet-01'
- 2. Open port 80 on firewall for this http server 
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| name | The name for Cloud SQL instance | `string` | `"tf-mssql-public"` | no |
+| project\_id | The project to run tests against | `string` | n/a | yes |
+| region | n/a | `string` | `"us-central1"` | no |
 
-```bash
-cd ../environments/dev
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| instance\_name | The name for Cloud SQL instance |
+| mssql\_connection | The connection name of the master instance to be used in connection strings |
+| project\_id | n/a |
+| public\_ip\_address | Public ip address |
+
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+
+## Run Terraform
+
+```
 terraform init
 terraform plan
 terraform apply
-terraform destroy
 ```
 
-## Promoting your environment to **production**
-
-Once you have tested your app (in this example an apache2 http server), you can promote your configuration to prodution. This step will:
- 1. Configure an apache2 http server on network '**prod**' and subnet '**prod**-subnet-01'
- 2. Open port 80 on firewall for this http server 
+## Test connection to database
 
 ```bash
-cd ../prod
-terraform init
-terraform plan
-terraform apply
+gcloud sql connect $(terraform output instance_name) --user=simpleuser
+```
+## Cleanup
+
+Remove all resources created by terraform:
+
+```bash
 terraform destroy
 ```
