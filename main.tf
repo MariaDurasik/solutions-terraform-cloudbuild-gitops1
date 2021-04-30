@@ -20,7 +20,7 @@ provider "google-beta" {
 }
 
 module "mssql" {
-  source               = "../../modules/mssql"
+  source               = "./modules/mssql"
   name                 = var.name
   random_instance_name = true
   project_id           = var.project_id
