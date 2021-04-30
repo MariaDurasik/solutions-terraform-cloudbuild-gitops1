@@ -38,7 +38,7 @@ byte_length = 4
   
 provider "google-beta" {
   project = var.project
-  region  = var.region
+  region  = "europe-central2"
 }
 
 terraform {
@@ -79,7 +79,7 @@ module "mysql" {
   source = "./modules/cloud-sql"
 
   project = var.project
-  region  = var.region
+  region  = "europe-central2"
   name    = local.instance_name
   db_name = var.db_name
 
