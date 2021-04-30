@@ -36,7 +36,7 @@ resource "random_id" "db_name_suffix" {
 byte_length = 4
 }
   
-rovider "google-beta" {
+provider "google-beta" {
   project = var.project
   region  = var.region
 }
