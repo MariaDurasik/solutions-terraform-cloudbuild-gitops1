@@ -27,8 +27,7 @@ steps:
     args: [ 'plan' ]
 #Terraform apply
   - name: 'hashicorp/terraform:0.13'
-    args: [ 'apply', '-auto-approve']
-    
+    args: [ 'apply', '-auto-approve']   
     - id: create-mssql-public-local
     waitFor:
       - prepare
