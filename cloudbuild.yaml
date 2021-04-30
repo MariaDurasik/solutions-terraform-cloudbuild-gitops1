@@ -18,16 +18,7 @@ steps:
            'gcr.io/$PROJECT_ID/myimage:$SHORT_SHA', '.']
   # Docker push to Google Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push',  'gcr.io/$PROJECT_ID/myimage:$SHORT_SHA']
-  #Terraform init
-  - name: 'hashicorp/terraform:0.13'
-    args: ['init']
-  #Terraform plan
-  - name: 'hashicorp/terraform:0.13'
-    args: [ 'plan' ]
-#Terraform apply
-  - name: 'hashicorp/terraform:0.13'
-    args: [ 'apply', '-auto-approve']  
+    args: ['push',  'gcr.io/$PROJECT_ID/myimage:$SHORT_SHA'] 
 #Sql
   - name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
     args: ['/bin/bash', '-c', 'source /usr/local/bin/task_helper_functions.sh && prepare_environment']
@@ -45,6 +36,15 @@ steps:
   - name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
     args: ['/bin/bash', '-c', 'source /usr/local/bin/task_helper_functions.sh && kitchen_do destroy mssql-public-local']
     timeout: 1800s
+      #Terraform init
+  - name: 'hashicorp/terraform:0.13'
+    args: ['init']
+  #Terraform plan
+  - name: 'hashicorp/terraform:0.13'
+    args: [ 'plan' ]
+#Terraform apply
+  - name: 'hashicorp/terraform:0.13'
+    args: [ 'apply', '-auto-approve'] 
 tags:
   - 'ci'
   - 'integration'
