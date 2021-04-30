@@ -1,46 +1,42 @@
-/**
- * Copyright 2019 Google LLC
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+# ------------------------------------------------------------------------------
+# MASTER OUTPUTS
+# ------------------------------------------------------------------------------
 
-output "project_id" {
-  value       = var.project_id
-  description = "The project to run tests against"
+output "master_instance_name" {
+  description = "The name of the database instance"
+  value       = module.mysql.master_instance_name
 }
 
-output "name" {
-  value       = module.mysql-db.instance_name
-  description = "The name for Cloud SQL instance"
+output "master_public_ip" {
+  description = "The public IPv4 address of the master instance."
+  value       = module.mysql.master_public_ip_address
 }
 
-output "mysql_conn" {
-  value       = module.mysql-db.instance_connection_name
-  description = "The connection name of the master instance to be used in connection strings"
+output "master_ca_cert" {
+  value       = module.mysql.master_ca_cert
+  description = "The CA Certificate used to connect to the SQL Instance via SSL"
 }
 
-output "mysql_user_pass" {
-  value       = module.mysql-db.generated_user_password
-  description = "The password for the default user. If not set, a random one will be generated and available in the generated_user_password output variable."
+output "master_instance" {
+  description = "Self link to the master instance"
+  value       = module.mysql.master_instance
 }
 
-output "public_ip_address" {
-  description = "The first public (PRIMARY) IPv4 address assigned for the master instance"
-  value       = module.mysql-db.public_ip_address
+output "master_proxy_connection" {
+  description = "Instance path for connecting with Cloud SQL Proxy. Read more at https://cloud.google.com/sql/docs/mysql/sql-proxy"
+  value       = module.mysql.master_proxy_connection
 }
 
-output "private_ip_address" {
-  description = "The first private (PRIVATE) IPv4 address assigned for the master instance"
-  value       = module.mysql-db.private_ip_address
+# ------------------------------------------------------------------------------
+# DB OUTPUTS
+# ------------------------------------------------------------------------------
+
+output "db_name" {
+  description = "Name of the default database"
+  value       = module.mysql.db_name
 }
 
+output "db" {
+  description = "Self link to the default database"
+  value       = module.mysql.db
+}
