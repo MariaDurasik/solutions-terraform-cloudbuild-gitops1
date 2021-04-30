@@ -46,8 +46,6 @@ module "mysql" {
   # When using these modules in your own templates, you will need to use a Git URL with a ref attribute that pins you
   # to a specific version of the modules, such as the following example:
   source = "github.com/gruntwork-io/terraform-google-sql.git//modules/cloud-sql?ref=v0.2.0"
-  source = "./modules/cloud-sql"
-
   project = var.project
   region  = var.region
   name    = local.instance_name
@@ -71,7 +69,6 @@ module "mysql" {
   # access from specific trusted networks, servers or applications in your VPC. By default, we recommend setting
   # deletion_protection to true, to ensure database instances are not inadvertently destroyed.
   enable_public_internet_access = true
-  deletion_protection           = false
 
   # Default setting for this is 'false' in 'variables.tf'
   # In the test cases, we're setting this to true, to test forced SSL.
