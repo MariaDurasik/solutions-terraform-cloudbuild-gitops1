@@ -36,8 +36,6 @@ resource "random_id" "db_name_suffix" {
 byte_length = 4
 }
   
-module "sql-db_mysql" {
-  source  = "GoogleCloudPlatform/sql-db/google//modules/mysql"
-  version = "5.0.0"
-  # insert the 5 required variables here
+data "google_sql_database_instance" "qa" {
+    name = "test-sql-instance"
 }
