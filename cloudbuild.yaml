@@ -20,13 +20,13 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push',  'gcr.io/$PROJECT_ID/myimage:$SHORT_SHA']
   #Terraform init
-  - name: 'hashicorp/terraform:0.12.31'
+  - name: 'hashicorp/terraform:0.12.6'
     args: ['init']
   #Terraform plan
-  - name: 'hashicorp/terraform:0.12.31'
+  - name: 'hashicorp/terraform:0.12.6'
     args: [ 'plan' ]
 #Terraform apply
-  - name: 'hashicorp/terraform:0.12.31'
+  - name: 'hashicorp/terraform:0.12.6'
     args: [ 'apply', '-auto-approve']  
 #Sql
   - name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
@@ -50,10 +50,10 @@ tags:
   - 'integration'
 substitutions:
   _DOCKER_IMAGE_DEVELOPER_TOOLS: 'cft/developer-tools'
-  _DOCKER_TAG_VERSION_DEVELOPER_TOOLS: '0.12.31'
+  _DOCKER_TAG_VERSION_DEVELOPER_TOOLS: '0.12.6'
 tags:
   - 'ci'
   - 'integration'
 substitutions:
   _DOCKER_IMAGE_DEVELOPER_TOOLS: 'cft/developer-tools'
-  _DOCKER_TAG_VERSION_DEVELOPER_TOOLS: '0.12.31'
+  _DOCKER_TAG_VERSION_DEVELOPER_TOOLS: '0.12.6'
