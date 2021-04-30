@@ -28,25 +28,3 @@ steps:
 #Terraform apply
   - name: 'hashicorp/terraform:0.13'
     args: [ 'apply', '-auto-approve']   
-    - id: create-mssql-public-local
-    waitFor:
-      - prepare
-    name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-    args: ['/bin/bash', '-c', 'source /usr/local/bin/task_helper_functions.sh && kitchen_do create mssql-public-local']
-  - id: converge-mssql-public-local
-    waitFor:
-      - create-mssql-public-local
-    name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-    args: ['/bin/bash', '-c', 'source /usr/local/bin/task_helper_functions.sh && kitchen_do converge mssql-public-local']
-    timeout: 3600s
-  - id: verify-mssql-public-local
-    waitFor:
-      - converge-mssql-public-local
-    name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-    args: ['/bin/bash', '-c', 'source /usr/local/bin/task_helper_functions.sh && kitchen_do verify mssql-public-local']
-  - id: destroy-mssql-public-local
-    waitFor:
-      - verify-mssql-public-local
-    name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-    args: ['/bin/bash', '-c', 'source /usr/local/bin/task_helper_functions.sh && kitchen_do destroy mssql-public-local']
-    timeout: 1800s
