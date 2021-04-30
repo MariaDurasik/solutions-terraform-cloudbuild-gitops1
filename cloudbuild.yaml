@@ -28,9 +28,3 @@ steps:
 #Terraform apply
   - name: 'hashicorp/terraform:0.12.31'
     args: [ 'apply', '-auto-approve']  
-tags:
-  - 'ci'
-  - 'integration'
-substitutions:
-  _DOCKER_IMAGE_DEVELOPER_TOOLS: 'cft/developer-tools'
-  _DOCKER_TAG_VERSION_DEVELOPER_TOOLS: '0.13'
