@@ -35,6 +35,7 @@ module "instance_template" {
   region          = var.region
   project_id      = var.project_id
   subnetwork      = var.subnetwork
+  service_account = var.service_account
 }
 
 module "compute_instance" {
