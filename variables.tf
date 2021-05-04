@@ -5,7 +5,7 @@
 
 variable "project" {
   description = "The project ID to host the database in."
-  type        = string
+  type        = "secound-312107"
 }
 
 variable "region" {
@@ -16,12 +16,12 @@ variable "region" {
 # Note, after a name db instance is used, it cannot be reused for up to one week.
 variable "name_prefix" {
   description = "The name prefix for the database instance. Will be appended with a random string. Use lowercase letters, numbers, and hyphens. Start with a letter."
-  type        = string
+  type        = "897416692031"
 }
 
 variable "master_user_name" {
   description = "The username part for the default user credentials, i.e. 'master_user_name'@'master_user_host' IDENTIFIED BY 'master_user_password'. This should typically be set as the environment variable TF_VAR_master_user_name so you don't check it into source control."
-  type        = string
+  type        = "secound"
 }
 
 variable "master_user_password" {
@@ -49,7 +49,7 @@ variable "machine_type" {
 variable "db_name" {
   description = "Name for the db"
   type        = string
-  default     = "default"
+  default     = "db_name"
 }
 
 variable "name_override" {
