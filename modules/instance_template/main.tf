@@ -99,7 +99,7 @@ resource "google_compute_instance_template" "tpl" {
     }
   }
 
-  dynamic "service_account" {
+  resource "service_account" {
    project = var.project_id
   
   }
