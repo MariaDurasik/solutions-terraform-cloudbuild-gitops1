@@ -1,17 +1,42 @@
-# MySQL Cloud SQL Public IP Example
+# Cloud SQL Database Example
 
-This folder contains an example of how to use the [Cloud SQL module](https://github.com/gruntwork-io/terraform-google-sql/tree/master/modules/cloud-sql) to create a [Google Cloud SQL](https://cloud.google.com/sql/) 
-[MySQL](https://cloud.google.com/sql/docs/mysql/) database instance with a [public IP address](https://cloud.google.com/sql/docs/mysql/connect-external-app#appaccessIP). 
+This example shows how to create the public MySQL Cloud database using the Terraform module.
 
-## How do you run this example?
+## Run Terraform
 
-To run this example, you need to:
+Create resources with terraform:
 
-1. Install [Terraform](https://www.terraform.io/).
-1. Open up `variables.tf` and set secrets at the top of the file as environment variables and fill in any other variables in
-   the file that don't have defaults. 
-1. `terraform init`.
-1. `terraform plan`.
-1. If the plan looks good, run `terraform apply`.
+```bash
+terraform init
+terraform plan
+terraform apply
+```
 
-When the templates are applied, Terraform will output the IP address of the instance and the instance path for [connecting using the Cloud SQL Proxy](https://cloud.google.com/sql/docs/mysql/connect-admin-proxy). 
+To remove all resources created by terraform:
+
+```bash
+terraform destroy
+```
+
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| authorized\_networks | List of mapped public networks authorized to access to the instances. Default - short range of GCP health-checkers IPs | `list(map(string))` | <pre>[<br>  {<br>    "name": "sample-gcp-health-checkers-range",<br>    "value": "130.211.0.0/28"<br>  }<br>]</pre> | no |
+| db\_name | The name of the SQL Database instance | `string` | `"example-mysql-public"` | no |
+| project\_id | The ID of the project in which resources will be provisioned. | `string` | n/a | yes |
+
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| mysql\_conn | The connection name of the master instance to be used in connection strings |
+| mysql\_user\_pass | The password for the default user. If not set, a random one will be generated and available in the generated\_user\_password output variable. |
+| name | The name for Cloud SQL instance |
+| private\_ip\_address | The first private (PRIVATE) IPv4 address assigned for the master instance |
+| project\_id | The project to run tests against |
+| public\_ip\_address | The first public (PRIMARY) IPv4 address assigned for the master instance |
+
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+
