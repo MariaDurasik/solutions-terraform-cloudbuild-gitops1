@@ -28,7 +28,7 @@ locals {
 ###############
 # Data Sources
 ###############
-resource "google_service_account" "default" {
+resource "google_service_account" "default1" {
   account_id   = "service_account_id"
   display_name = "Service Account"
 }
@@ -71,7 +71,7 @@ resource "google_compute_instance_from_template" "compute_instance" {
   
   service_account {
     # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
-    email  = google_service_account.default.email
+    email  = google_service_account.default1.email
     scopes = ["cloud-platform"]
   }
 }
