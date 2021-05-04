@@ -17,11 +17,6 @@
 ###############
 # Data Sources
 ###############
-resource "google_service_account" "default" {
-  project      = "secound-312107"
-  account_id   = "service-account-id"
-  display_name = "Service Account"
-}
 data "google_compute_image" "image" {
   project = var.source_image != "" ? var.source_image_project : "centos-cloud"
   name    = var.source_image != "" ? var.source_image : "centos-7-v20201112"
@@ -107,10 +102,11 @@ resource "google_compute_instance_template" "tpl" {
   dynamic "service_account" {
     for_each = [var.service_account]
     content {
-     email  = google_service_account.default.email
-     scopes = ["cloud-platform"]
+      email  = lookup(service_account.value, "email", null)
+      scopes = lookup(service_account.value, "scopes", null)
     }
   }
+
 
   network_interface {
     network            = var.network
