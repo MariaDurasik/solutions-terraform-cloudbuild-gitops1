@@ -17,11 +17,13 @@
 variable "project_id" {
   description = "The project ID to manage the Cloud SQL resources"
   type        = string
+  default     = "secound-312107"
 }
 
 variable "name" {
   type        = string
   description = "The name of the Cloud SQL resources"
+  default     = "db_name"
 }
 
 variable "random_instance_name" {
@@ -34,6 +36,7 @@ variable "random_instance_name" {
 variable "database_version" {
   description = "The database version to use"
   type        = string
+  default     = "14.0"
 }
 
 // required
