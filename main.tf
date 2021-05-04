@@ -29,6 +29,14 @@ provider "random" {
 resource "random_id" "name" {
   byte_length = 2
 }
+   
+module "instance_template" {
+  source          = "./modules/instance_template"
+  region          = var.region
+  project_id      = var.project_id
+  subnetwork      = var.subnetwork
+  service_account = var.service_account
+}
 
 module "compute_instance" {
   source            = "./modules/compute_instance"
