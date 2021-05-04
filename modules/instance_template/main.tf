@@ -99,10 +99,6 @@ resource "google_compute_instance_template" "tpl" {
     }
   }
 
-  resource "service_account" {
-   project = var.project_id
-  
-  }
 
 
   network_interface {
