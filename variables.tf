@@ -5,7 +5,8 @@
 
 variable "project" {
   description = "The project ID to host the database in."
-  type        = secound-312107
+  type        = string
+  default     = "secound-312107"
 }
 
 variable "region" {
@@ -16,7 +17,8 @@ variable "region" {
 # Note, after a name db instance is used, it cannot be reused for up to one week.
 variable "name_prefix" {
   description = "The name prefix for the database instance. Will be appended with a random string. Use lowercase letters, numbers, and hyphens. Start with a letter."
-  type        = 897416692031
+  type        = string
+  default     = "897416692031"
 }
 
 variable "master_user_name" {
