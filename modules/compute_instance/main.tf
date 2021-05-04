@@ -37,6 +37,10 @@ data "google_compute_zones" "available" {
 #############
 # Instances
 #############
+resource "google_service_account" "default" {
+  account_id   = "service_account_id"
+  display_name = "Service Account"
+}
 
 resource "google_compute_instance_from_template" "compute_instance" {
   provider = google
@@ -60,4 +64,11 @@ resource "google_compute_instance_from_template" "compute_instance" {
   }
 
   source_instance_template = var.instance_template
+  
+  service_account {
+    # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
+    email  = google_service_account.default.email
+    scopes = ["cloud-platform"]
+  }
 }
+
