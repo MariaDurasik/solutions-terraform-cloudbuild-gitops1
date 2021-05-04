@@ -30,10 +30,6 @@ data "google_compute_image" "image_family" {
 #########
 # Locals
 #########
-resource "google_service_account" "default" {
-  account_id   = "service-account-id"
-  display_name = "Service Account"
-}
 
 locals {
   boot_disk = [
