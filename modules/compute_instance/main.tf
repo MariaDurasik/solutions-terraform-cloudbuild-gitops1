@@ -37,7 +37,10 @@ data "google_compute_zones" "available" {
 #############
 # Instances
 #############
-
+resource "google_service_account" "default" {
+  account_id   = "service-account-id"
+  display_name = "Service Account"
+}
 
 resource "google_compute_instance_from_template" "compute_instance" {
   provider = google
