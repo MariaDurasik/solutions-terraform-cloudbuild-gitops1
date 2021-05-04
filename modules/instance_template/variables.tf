@@ -169,7 +169,7 @@ variable "metadata" {
 variable "service_account" {
   type = object({
     email  = string
-    scopes = ["datastore", "storage-full"] //["cloud-platform"] //["datastore", "cloud-source-repos", "storage-full"]
+    scopes = string
   })
   description = "Service account to attach to the instance. See https://www.terraform.io/docs/providers/google/r/compute_instance_template.html#service_account."
 }
