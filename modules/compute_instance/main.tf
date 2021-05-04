@@ -44,7 +44,7 @@ resource "google_service_account" "default" {
 
 resource "google_compute_instance_from_template" "compute_instance" {
   provider = google
-  count    = local.num_instances
+  count    = "1"
   name     = "${local.hostname}-${format("%03d", count.index + 1)}"
   project  = local.project_id
   zone     = var.zone == null ? data.google_compute_zones.available.names[count.index % length(data.google_compute_zones.available.names)] : var.zone
