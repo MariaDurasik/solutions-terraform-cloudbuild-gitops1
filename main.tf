@@ -31,7 +31,7 @@ resource "random_id" "name" {
 }
 
 module "mysql-db" {
-  source               = "../../modules/mysql"
+  source               = "./modules/mysql"
   name                 = var.db_name
   random_instance_name = true
   database_version     = "MYSQL_5_6"
