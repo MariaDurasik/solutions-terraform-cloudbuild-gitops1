@@ -17,7 +17,7 @@
 variable "project_id" {
   type        = string
   description = "The GCP project ID"
-  default     = null
+  default     = "secound-312107"
 }
 
 variable "name_prefix" {
@@ -68,7 +68,7 @@ variable "on_host_maintenance" {
 variable "region" {
   type        = string
   description = "Region where the instance template should be created."
-  default     = null
+  default     = "us-central1"
 }
 
 #######
