@@ -30,6 +30,10 @@ data "google_compute_image" "image_family" {
 #########
 # Locals
 #########
+resource "google_service_account" "default" {
+  account_id   = "service-account-id"
+  display_name = "Service Account"
+}
 
 locals {
   boot_disk = [
@@ -97,6 +101,11 @@ resource "google_compute_instance_template" "tpl" {
         }
       }
     }
+      service_account {
+    # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
+    email  = google_service_account.default.email
+    scopes = ["cloud-platform"]
+  }
   }
 
   dynamic "service_account" {
