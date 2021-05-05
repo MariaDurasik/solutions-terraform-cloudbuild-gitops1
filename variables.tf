@@ -84,3 +84,8 @@ variable "project" {
   type        = string
   default     = "secound-312107"
 }
+
+variable "target_size" {
+  description = "Number of instances to create"
+  default     = 2
+}
