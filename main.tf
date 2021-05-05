@@ -30,7 +30,7 @@ resource "random_id" "name" {
   byte_length = 2
 }
 module "iap_bastion_group" {
-  source      = "../../modules/bastion-group"
+  source      = "./modules/bastion-group"
   project     = var.project
   region      = var.region
   zone        = var.zone
