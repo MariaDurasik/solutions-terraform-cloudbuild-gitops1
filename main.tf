@@ -30,28 +30,43 @@ resource "random_id" "name" {
   byte_length = 2
 }
    
-module "instance_template" {
-  source          = "./modules/instance_template"
-  region          = var.region
-  project_id      = var.project_id
-  subnetwork      = var.subnetwork
-  service_account = var.service_account
+module "iap_bastion" {
+  source = "terraform-google-modules/bastion-host/google"
+  project = var.project
+  zone    = var.zone
+  network = google_compute_network.network.self_link
+  subnet  = google_compute_subnetwork.subnet.self_link
+  members = var.members
 }
 
-module "compute_instance" {
-  source            = "./modules/compute_instance"
-  region            = var.region
-  zone              = var.zone
-  subnetwork        = var.subnetwork
-  num_instances     = var.num_instances
-  hostname          = "instance-simple"
-  instance_template = module.instance_template.self_link
-  access_config = [{
-    nat_ip       = var.nat_ip
-    network_tier = var.network_tier
-  }, ]
+resource "google_compute_network" "network" {
+  project                 = var.project
+  name                    = "test-network"
+  auto_create_subnetworks = false
 }
 
+resource "google_compute_subnetwork" "subnet" {
+  project                  = var.project
+  name                     = "test-subnet"
+  region                   = var.region
+  ip_cidr_range            = "10.127.0.0/20"
+  network                  = google_compute_network.network.self_link
+  private_ip_google_access = true
+}
+
+resource "google_compute_firewall" "allow_access_from_bastion" {
+  project = var.project
+  name    = "allow-bastion-ssh"
+  network = google_compute_network.network.self_link
+
+  allow {
+    protocol = "tcp"
+    ports    = ["22"]
+  }
+
+  # Allow SSH only from IAP Bastion
+  source_service_accounts = [module.iap_bastion.service_account]
+}
 
 module "mysql-db" {
   source               = "./modules/mysql"
