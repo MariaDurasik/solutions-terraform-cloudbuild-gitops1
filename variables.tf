@@ -73,3 +73,14 @@ variable "service_account" {
   })
   description = "Service account to attach to the instance. See https://www.terraform.io/docs/providers/google/r/compute_instance_template.html#service_account."
 }
+   
+variable "members" {
+  description = "List of members in the standard GCP form: user:{email}, serviceAccount:{email}, group:{email}"
+  default     = []
+}
+
+variable "project" {
+  description = "Project ID where the bastion will run"
+  type        = string
+  default     = "secound-312107"
+}
