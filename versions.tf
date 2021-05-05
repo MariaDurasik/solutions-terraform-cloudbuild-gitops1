@@ -13,7 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 terraform {
-  required_version = ">=0.12.6"
+  required_version = ">=0.13"
+  required_providers {
+    google = {
+      source = "hashicorp/google"
+    }
+    google-beta = {
+      source = "hashicorp/google-beta"
+    }
+    random = {
+      source = "hashicorp/random"
+    }
+  }
 }
