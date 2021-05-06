@@ -38,7 +38,7 @@ resource "google_compute_network" "network" {
 
 resource "google_compute_subnetwork" "subnet" {
   project                  = var.project
-  name                     = "test-subnet-iap"
+  name                     = "test-subnet-iap1"
   region                   = var.region
   ip_cidr_range            = "10.127.0.0/20"
   network                  = google_compute_network.network.self_link
