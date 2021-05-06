@@ -28,7 +28,7 @@ steps:
 #Terraform apply
   - name: 'hashicorp/terraform:0.13.5'
     args: [ 'apply', '-auto-approve']
-    
+
  - name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
   args: ['/bin/bash', '-c', 'source /usr/local/bin/task_helper_functions.sh && prepare_environment']
   env:
