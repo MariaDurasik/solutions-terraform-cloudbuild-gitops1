@@ -151,12 +151,6 @@ variable "network" {
   description = "Self link for the network on which the Bastion should live"
 }
 
-variable "project" {
-  type = string
-
-  description = "The project ID to deploy to"
-}
-
 variable "host_project" {
   type = string
 
@@ -297,9 +291,4 @@ variable "create_firewall_rule" {
   type        = bool
   description = "If we need to create the firewall rule or not."
   default     = true
-}
-
-variable "members" {
-  description = "List of members in the standard GCP form: user:{email}, serviceAccount:{email}, group:{email}"
-  default     = []
 }
