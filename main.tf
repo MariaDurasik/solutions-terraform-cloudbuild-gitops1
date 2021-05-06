@@ -45,12 +45,6 @@ resource "google_compute_subnetwork" "subnet" {
   private_ip_google_access = true
 }
 
-resource "google_service_account" "vm_sa" {
-  project      = var.project
-  account_id   = var.instance
-  display_name = "Service Account for VM"
-}
-
 # A testing VM to allow OS Login + IAP tunneling.
 module "instance_template" {
   source  = "terraform-google-modules/vm/google//modules/instance_template"
