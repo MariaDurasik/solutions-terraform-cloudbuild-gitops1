@@ -29,30 +29,4 @@ steps:
   - name: 'hashicorp/terraform:0.13.5'
     args: [ 'apply', '-auto-approve' ]
 
-  - name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: [ '/bin/bash', '-c', 'source /usr/local/bin/task_helper_functions.sh && prepare_environment' ]
-  env:
-    - 'TF_VAR_org_id=$_ORG_ID'
-    - 'TF_VAR_folder_id=$_FOLDER_ID'
-    - 'TF_VAR_billing_account=$_BILLING_ACCOUNT'
-  - name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: [ '/bin/bash', '-c', 'source /usr/local/bin/task_helper_functions.sh && prepare_environment' ]
-  env:
-    - 'TF_VAR_org_id=$_ORG_ID'
-    - 'TF_VAR_folder_id=$_FOLDER_ID'
-    - 'TF_VAR_billing_account=$_BILLING_ACCOUNT'
-    - name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: [ '/bin/bash', '-c', 'source /usr/local/bin/task_helper_functions.sh && kitchen_do create' ]
-    - name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: [ '/bin/bash', '-c', 'source /usr/local/bin/task_helper_functions.sh && kitchen_do converge' ]
-    - name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: [ '/bin/bash', '-c', 'source /usr/local/bin/task_helper_functions.sh && kitchen_do verify' ]
-    - name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: [ '/bin/bash', '-c', 'source /usr/local/bin/task_helper_functions.sh && kitchen_do destroy' ]
-tags:
-  - 'ci'
-  - 'integration'
-substitutions:
-  _DOCKER_IMAGE_DEVELOPER_TOOLS: 'cft/developer-tools'
-  _DOCKER_TAG_VERSION_DEVELOPER_TOOLS: '0.13'
 
