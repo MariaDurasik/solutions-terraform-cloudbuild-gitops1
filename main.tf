@@ -95,7 +95,7 @@ resource "google_project_iam_member" "os_login_bindings" {
 
 module "iap_tunneling" {
   source                     = "./modules/iap-tunneling"
-  fw_name_allow_ssh_from_iap = "test-allow-ssh-from-iap-to-tunnel1"
+  fw_name_allow_ssh_from_iap = "test-allow-ssh-from-iap-to-tunnel2"
   project                    = var.project
   network                    = google_compute_network.network.self_link
   service_accounts           = [google_service_account.vm_sa.email]
