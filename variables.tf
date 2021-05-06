@@ -40,12 +40,6 @@ variable "authorized_networks" {
   default     = "us-central1"
 }
 
-variable "zone" {
-  description = "The GCP zone to create resources in"
-  type        = string
-  default     = null
-}
-
 variable "subnetwork" {
   description = "The subnetwork selflink to host the compute instances in"
 }
@@ -136,13 +130,6 @@ variable "machine_type" {
   type        = string
   description = "Instance type for the Bastion host"
   default     = "n1-standard-1"
-}
-
-variable "members" {
-  type = list(string)
-
-  description = "List of IAM resources to allow access to the bastion host"
-  default     = []
 }
 
 variable "name" {
