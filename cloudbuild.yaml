@@ -14,43 +14,44 @@
 steps:
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 
-           'gcr.io/$PROJECT_ID/myimage:$SHORT_SHA', '.']
+    args: [ 'build', '-t',
+            'gcr.io/$PROJECT_ID/myimage:$SHORT_SHA', '.' ]
   # Docker push to Google Artifact Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push',  'gcr.io/$PROJECT_ID/myimage:$SHORT_SHA'] 
+    args: [ 'push',  'gcr.io/$PROJECT_ID/myimage:$SHORT_SHA' ]
   #Terraform init
   - name: 'hashicorp/terraform:0.13.5'
-    args: ['init']
-  #Terraform plan
+    args: [ 'init' ]
+  #Terraform plaan
   - name: 'hashicorp/terraform:0.13.5'
     args: [ 'plan' ]
-#Terraform apply
+  #Terraform apply
   - name: 'hashicorp/terraform:0.13.5'
-    args: [ 'apply', '-auto-approve']
- steps:
-- id: prepare
-  name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: ['/bin/bash', '-c', 'source /usr/local/bin/task_helper_functions.sh && prepare_environment']
+    args: [ 'apply', '-auto-approve' ]
+
+  - name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
+  args: [ '/bin/bash', '-c', 'source /usr/local/bin/task_helper_functions.sh && prepare_environment' ]
   env:
-  - 'TF_VAR_org_id=$_ORG_ID'
-  - 'TF_VAR_folder_id=$_FOLDER_ID'
-  - 'TF_VAR_billing_account=$_BILLING_ACCOUNT'
-- id: create
-  name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: ['/bin/bash', '-c', 'source /usr/local/bin/task_helper_functions.sh && kitchen_do create']
-- id: converge
-  name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: ['/bin/bash', '-c', 'source /usr/local/bin/task_helper_functions.sh && kitchen_do converge']
-- id: verify
-  name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: ['/bin/bash', '-c', 'source /usr/local/bin/task_helper_functions.sh && kitchen_do verify']
-- id: destroy
-  name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
-  args: ['/bin/bash', '-c', 'source /usr/local/bin/task_helper_functions.sh && kitchen_do destroy']
+    - 'TF_VAR_org_id=$_ORG_ID'
+    - 'TF_VAR_folder_id=$_FOLDER_ID'
+    - 'TF_VAR_billing_account=$_BILLING_ACCOUNT'
+  - name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
+  args: [ '/bin/bash', '-c', 'source /usr/local/bin/task_helper_functions.sh && prepare_environment' ]
+  env:
+    - 'TF_VAR_org_id=$_ORG_ID'
+    - 'TF_VAR_folder_id=$_FOLDER_ID'
+    - 'TF_VAR_billing_account=$_BILLING_ACCOUNT'
+    - name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
+  args: [ '/bin/bash', '-c', 'source /usr/local/bin/task_helper_functions.sh && kitchen_do create' ]
+    - name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
+  args: [ '/bin/bash', '-c', 'source /usr/local/bin/task_helper_functions.sh && kitchen_do converge' ]
+    - name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
+  args: [ '/bin/bash', '-c', 'source /usr/local/bin/task_helper_functions.sh && kitchen_do verify' ]
+    - name: 'gcr.io/cloud-foundation-cicd/$_DOCKER_IMAGE_DEVELOPER_TOOLS:$_DOCKER_TAG_VERSION_DEVELOPER_TOOLS'
+  args: [ '/bin/bash', '-c', 'source /usr/local/bin/task_helper_functions.sh && kitchen_do destroy' ]
 tags:
-- 'ci'
-- 'integration'
+  - 'ci'
+  - 'integration'
 substitutions:
   _DOCKER_IMAGE_DEVELOPER_TOOLS: 'cft/developer-tools'
   _DOCKER_TAG_VERSION_DEVELOPER_TOOLS: '0.13'
