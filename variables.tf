@@ -70,7 +70,7 @@ variable "service_account" {
    
 variable "members" {
   description = "List of members in the standard GCP form: user:{email}, serviceAccount:{email}, group:{email}"
-  default     = []
+  type        = list(string)
 }
 
 variable "project" {
@@ -291,4 +291,8 @@ variable "create_firewall_rule" {
   type        = bool
   description = "If we need to create the firewall rule or not."
   default     = true
+}
+
+variable "instance" {
+  description = "Name of the example VM instance to create and allow SSH from IAP."
 }
