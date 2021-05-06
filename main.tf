@@ -32,13 +32,13 @@ resource "random_id" "name" {
    
 resource "google_compute_network" "network" {
   project                 = var.project
-  name                    = "test-network-iaP4"
+  name                    = "test-network-ia"
   auto_create_subnetworks = false
 }
 
 resource "google_compute_subnetwork" "subnet" {
   project                  = var.project
-  name                     = "test-subnet-iap4"
+  name                     = "test-subnet-ia"
   region                   = var.region
   ip_cidr_range            = "10.127.0.0/20"
   network                  = google_compute_network.network.self_link
