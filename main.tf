@@ -32,13 +32,13 @@ resource "random_id" "name" {
    
 resource "google_compute_network" "network" {
   project                 = var.project
-  name                    = "test-network-iad"
+  name                    = "test-network-iah"
   auto_create_subnetworks = false
 }
 
 resource "google_compute_subnetwork" "subnet" {
   project                  = var.project
-  name                     = "test-subnet-iad"
+  name                     = "test-subnet-iah"
   region                   = var.region
   ip_cidr_range            = "10.127.0.0/20"
   network                  = google_compute_network.network.self_link
@@ -95,7 +95,7 @@ resource "google_project_iam_member" "os_login_bindings" {
 
 module "iap_tunneling" {
   source                     = "./modules/iap-tunneling"
-  fw_name_allow_ssh_from_iap = "test-allow-ssh-from-iap-to-tunne3"
+  fw_name_allow_ssh_from_iap = "test-allow-ssh-from-iap-to-tunne5"
   project                    = var.project
   network                    = google_compute_network.network.self_link
   service_accounts           = [google_service_account.vm_sa.email]
